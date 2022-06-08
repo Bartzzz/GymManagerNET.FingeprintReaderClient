@@ -50,16 +50,16 @@ namespace GymManagerNET.FingeprintReaderRestService
             return fingerPrintObject;
         }
 
-        public SubscriptionDto VerifySubscription(FingerPrintDto fprint)
+        public ActiveSubscriptionDto VerifySubscription(FingerPrintDto fprint)
         {
             var request = new RestRequest(_verifySubscription);
             request.RequestFormat = DataFormat.Json;
-            request.AddParameter("userId", fprint.UserId);
+            request.AddParameter("userId", fprint.UserId, ParameterType.GetOrPost);
             var response = _client.Post(request);
 
             if (!response.IsSuccessful) throw new Exception($"Operation failed: {response.ErrorMessage}");
 
-            var fingerPrintObject = JsonConvert.DeserializeObject<SubscriptionDto>(response.Content);
+            var fingerPrintObject = JsonConvert.DeserializeObject<ActiveSubscriptionDto>(response.Content);
             return fingerPrintObject;
         }
     }

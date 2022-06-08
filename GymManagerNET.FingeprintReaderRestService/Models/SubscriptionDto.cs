@@ -10,7 +10,6 @@ namespace GymManagerNET.Core.Models.DTOs.Subscriptions
         public int EntrancesLeft { get; set; }
         public int UserId
         { get; set; }
-        public bool IsActive { get; set; }
     }
     public enum SubscriptionType
     {

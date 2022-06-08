@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel.DataAnnotations.Schema;
 using FingerprintReader.Base;
 using GymManagerNET.FingeprintReaderRestService;
 using GymManagerNET.FingeprintReaderRestService.Models;
@@ -10,7 +9,6 @@ Console.WriteLine("Hello, World!");
 var apiBaseUri = ConfigurationManager.AppSettings["ApiBaseUri"];
 var restService = new FingerprintsRestService(apiBaseUri);
 var fingerPrintScannerService = new FingerPrintService(restService);
-var dbFingerprints = restService.GetAllFingerPrints().ToList();
 Console.WriteLine("Fingerprint scanner for GymManagerNET demo client");
 var option = string.Empty;
 
@@ -60,7 +58,15 @@ while (true)
                 fingerPrintScannerService.GetCharsAndSearchForMatchInDatabase(restService.DatabaseFingerPrintsCache, Console.WriteLine);
             if (fprint != null && !string.IsNullOrEmpty(fprint.Fingerprint))
             {
-                restService.VerifySubscription(fprint);
+                var sub = restService.VerifySubscription(fprint);
+                if (sub is { IsActive: true })
+                {
+                    Console.WriteLine($"User {sub.UserId} has valid subscription");
+                }
+                else
+                {
+                    Console.WriteLine("No or invalid subscription");
+                }
             }
         }
         catch (Exception ex)
