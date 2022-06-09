@@ -42,7 +42,7 @@ while (true)
         try
         {
             var fprint = fingerPrintScannerService.DownloadCharacteristicsFromCapturedImage(Console.WriteLine);
-            restService.AddFingerPrint(new FingerPrintDto() { Fingerprint = Convert.ToHexString(fprint), UserId = 2 });
+            restService.AddFingerPrint(new FingerPrintDto() { Fingerprint = Convert.ToHexString(fprint), UserId = userId });
         }
         catch (Exception ex)
         {

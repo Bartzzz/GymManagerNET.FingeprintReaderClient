@@ -3,8 +3,8 @@ using GymManagerNET.FingeprintReaderRestService.Models;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace GymManagerNET.FingeprintReaderRestService
-{
+namespace GymManagerNET.FingeprintReaderRestService;
+
     public class FingerprintsRestService
     {
         public List<FingerPrintDto> DatabaseFingerPrintsCache = new();
@@ -63,4 +63,3 @@ namespace GymManagerNET.FingeprintReaderRestService
             return fingerPrintObject;
         }
     }
-}
